@@ -49,8 +49,15 @@ public class FileCabinet implements Cabinet {
 
     @Override
     public int count() {
+        int zlicz = 0;
+        for (Folder folder : folders) {
+            zlicz++;
+            if (folder instanceof MultiFolder) {
+                zlicz += new FileCabinet(((MultiFolder) folder).getFolders()).count();
 
-        return 0;
+            }
+        }
+        return zlicz;
     }
 
 }
